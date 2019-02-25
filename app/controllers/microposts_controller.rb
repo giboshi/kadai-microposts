@@ -29,4 +29,9 @@ class MicropostsController < ApplicationController
       redirect_to root_url
     end
   end
+  
+  def likes
+    @micropost = current_user.microposts.find(params[:like_id])
+    @liked_microposts = @micropost.likes.page(params[:page])
+  end
 end

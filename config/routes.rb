@@ -8,15 +8,20 @@ Rails.application.routes.draw do
   
   get 'signup',to: 'users#new'
   
-  resources :users ,only: [ :index, :show, :new, :create] do
+ 
+  resources :users ,only: [:index, :show, :new, :create] do
     member do
       get :followings
       get :followers
+      get :likes #お気に入りした投稿一覧ページを表示させる
+      get :liked_microposts
+      
     end
-    collection do
-      get :search
-    end
+    #collection do
+     # get :search
+    #end
   end
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
 end
